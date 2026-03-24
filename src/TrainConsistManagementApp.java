@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class train_consist_management_app {
 
@@ -7,28 +7,16 @@ public class train_consist_management_app {
 
         System.out.println("=== Train Consist Management App ===");
 
+        Set<String> bogieIds = new HashSet<>();
 
-        List<String> passengerBogies = new ArrayList<>();
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
 
-
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
-
-
-        System.out.println("\nPassenger Bogies after addition:");
-        System.out.println(passengerBogies);
-
-        passengerBogies.remove("AC Chair");
-
-        System.out.println("\nPassenger Bogies after removal of AC Chair:");
-        System.out.println(passengerBogies);
-
-        boolean exists = passengerBogies.contains("Sleeper");
-        System.out.println("\nDoes Sleeper bogie exist? " + exists);
-
-        System.out.println("\nFinal Passenger Bogies List:");
-        System.out.println(passengerBogies);
+        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
+        System.out.println(bogieIds);
 
     }
 }
