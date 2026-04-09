@@ -1,24 +1,62 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Scanner;
 
-public class train_consist_management_app {
+public class TrainConsistManagementApp {
+
+
+    public static boolean binarySearch(String[] bogieIDs, String key) {
+        int low = 0;
+        int high = bogieIDs.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int cmp = bogieIDs[mid].compareTo(key);
+
+            if (cmp == 0) {
+                return true;
+            } else if (cmp < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return false;
+    }
+
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== Train Consist Management App ===");
-
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
-
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 78);
-        bogieCapacityMap.put("First Class", 24);
-
-        System.out.println("\nBogie Capacity Details:");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        System.out.print("Enter number of bogies: ");
+        if (!scanner.hasNextInt()) {
+            System.out.println("Please enter a valid number.");
+            return;
         }
 
+        int n = scanner.nextInt();
+        scanner.nextLine();
+
+        String[] bogieIDs = new String[n];
+
+        System.out.println("Enter bogie IDs:");
+        for (int i = 0; i < n; i++) {
+            bogieIDs[i] = scanner.nextLine();
+        }
+
+
+        Arrays.sort(bogieIDs);
+
+        System.out.print("Enter bogie ID to search: ");
+        String searchKey = scanner.nextLine();
+
+        boolean found = binarySearch(bogieIDs, searchKey);
+
+        if (found) {
+            System.out.println("Bogie ID " + searchKey + " exists in the train consist.");
+        } else {
+            System.out.println("Bogie ID " + searchKey + " not found in the train consist.");
+        }
+
+        scanner.close();
     }
 }
