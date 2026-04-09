@@ -1,24 +1,31 @@
-import java.util.HashMap;
-import java.util.Map;
-
-public class train_consist_management_app {
-
+public class TrainConsistManagementApp {
     public static void main(String[] args) {
+        System.out.println("======================================");
+        System.out.println("UC 16 manual sorting using bubble sort");
+        System.out.println("======================================");
 
-        System.out.println("=== Train Consist Management App ===");
+        int[] capacities = {72,56,24,70,60};
 
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
+        System.out.println("original capacities");
 
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 78);
-        bogieCapacityMap.put("First Class", 24);
-
-        System.out.println("\nBogie Capacity Details:");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        for( int c :capacities){
+            System.out.println(c);
         }
 
+        for(int i = 0;i< capacities.length-1;i++){
+            for(int j = 0;j < capacities.length-1;j++){
+                int temp=0;
+                if(capacities[j] > capacities[j+1]) {
+                    temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("sorted capacities");
+        for(int c : capacities){
+            System.out.println(c);
+        }
     }
 }
