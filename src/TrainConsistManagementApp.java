@@ -1,24 +1,68 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Scanner;
 
-public class train_consist_management_app {
+public class TrainConsistManagementApp {
+
+
+    public static boolean binarySearchWithValidation(String[] bogieIDs, String key) {
+
+        if (bogieIDs == null || bogieIDs.length == 0) {
+            throw new IllegalStateException("Cannot search: No bogies exist in the train consist.");
+        }
+
+        Arrays.sort(bogieIDs);
+
+        int low = 0;
+        int high = bogieIDs.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int cmp = bogieIDs[mid].compareTo(key);
+
+            if (cmp == 0) {
+                return true;
+            } else if (cmp < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return false;
+    }
 
     public static void main(String[] args) {
 
-        System.out.println("=== Train Consist Management App ===");
+        Scanner scanner = new Scanner(System.in);
 
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
+        System.out.print("Enter number of bogies: ");
+        int n = scanner.nextInt();
+        scanner.nextLine();
 
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 78);
-        bogieCapacityMap.put("First Class", 24);
+        String[] bogieIDs = new String[n];
 
-        System.out.println("\nBogie Capacity Details:");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        if (n > 0) {
+            System.out.println("Enter bogie IDs:");
+            for (int i = 0; i < n; i++) {
+                bogieIDs[i] = scanner.nextLine();
+            }
         }
 
+        System.out.print("Enter bogie ID to search: ");
+        String searchKey = scanner.nextLine();
+
+        try {
+            boolean found = binarySearchWithValidation(bogieIDs, searchKey);
+
+            if (found) {
+                System.out.println("Bogie ID " + searchKey + " exists in the train consist.");
+            } else {
+                System.out.println("Bogie ID " + searchKey + " not found in the train consist.");
+            }
+        } catch (IllegalStateException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+
+        scanner.close();
     }
 }
