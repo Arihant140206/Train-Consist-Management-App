@@ -1,24 +1,44 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Scanner;
 
-public class train_consist_management_app {
+public class TrainConsistManagementApp {
+
+
+    public static boolean linearSearch(String[] bogieIDs, String key) {
+        for (int i = 0; i < bogieIDs.length; i++) {
+            if (bogieIDs[i].equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
 
-        System.out.println("=== Train Consist Management App ===");
+        Scanner scanner = new Scanner(System.in);
 
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
+        System.out.print("Enter number of bogies: ");
+        int n = scanner.nextInt();
+        scanner.nextLine();
 
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 78);
-        bogieCapacityMap.put("First Class", 24);
+        String[] bogieIDs = new String[n];
 
-        System.out.println("\nBogie Capacity Details:");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        System.out.println("Enter bogie IDs:");
+        for (int i = 0; i < n; i++) {
+            bogieIDs[i] = scanner.nextLine();
         }
 
+        System.out.print("Enter bogie ID to search: ");
+        String searchKey = scanner.nextLine();
+
+
+        boolean found = linearSearch(bogieIDs, searchKey);
+
+        if (found) {
+            System.out.println("Bogie ID " + searchKey + " exists in the train consist.");
+        } else {
+            System.out.println("Bogie ID " + searchKey + " not found in the train consist.");
+        }
+
+        scanner.close();
     }
 }
