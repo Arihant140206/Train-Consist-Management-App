@@ -1,24 +1,28 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Scanner;
 
-public class train_consist_management_app {
+public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        System.out.println("=== Train Consist Management App ===");
+        Scanner scanner = new Scanner(System.in);
 
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
+        System.out.print("Enter number of bogies: ");
+        int n = scanner.nextInt();
+        scanner.nextLine();
 
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 78);
-        bogieCapacityMap.put("First Class", 24);
+        String[] bogieNames = new String[n];
 
-        System.out.println("\nBogie Capacity Details:");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        System.out.println("Enter bogie type names:");
+        for (int i = 0; i < n; i++) {
+            bogieNames[i] = scanner.nextLine();
         }
 
+        Arrays.sort(bogieNames);
+
+
+        System.out.println("Sorted Bogie Names: " + Arrays.toString(bogieNames));
+
+        scanner.close();
     }
 }
